@@ -2,6 +2,7 @@
 
 
 lock_file="/tmp/only_run.lock"
+# lock文件超过7天认为脚本线程已被kill
 lock_file_expired=604800
 
 function execute(){
