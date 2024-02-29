@@ -1,5 +1,7 @@
 #!/bin/bash
 
+nginx -c /etc/nginx/nginx.conf
+
 # 要执行的命令或脚本
 command_to_execute="/script/only_run.sh"
 
