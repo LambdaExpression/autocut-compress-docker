@@ -6,7 +6,7 @@ threshold=$2
 # 检查文件是否存在
 if [ ! -e "$file_path" ]; then
   echo "false"
-  return 1
+  exit 1
 fi
 
 # 获取文件的最后修改时间（以秒为单位）
