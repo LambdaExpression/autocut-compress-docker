@@ -2,7 +2,7 @@
 
 
 lock_file="/tmp/only_run.lock"
-lock_file_expired=120
+lock_file_expired=604800
 
 function execute(){
 	bash /script/autocut_run.sh
