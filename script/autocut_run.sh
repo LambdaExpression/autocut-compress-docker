@@ -6,16 +6,16 @@ directory="/autocut/video/auto"
 # 导出指定目录
 out_directory="/autocut/video/out"
 
-# 定义要扫描的文件后缀列表
-file_extensions=("mp4" "mkv")  # 可根据需要添加其他后缀
+# 定义要扫描的文件后缀列表 全局变量 file_extensions="mp4,xx,xx,xx"
+file_extensions_array=(${file_extensions//,/})  # 可根据需要添加其他后缀
 
-# 比较文件最后更新时间和当前时间差
-file_update_time_gt=600
+# 比较文件最后更新时间和当前时间差, 该变量改为使用全局变量
+# auto_file_update_time_gt=600
 
 # 启用 nullglob 选项，确保没有匹配文件时不保留通配符
 shopt -s nullglob
 
-for file_extension in "${file_extensions[@]}"; do
+for file_extension in "${file_extensions_array[@]}"; do
     # 扫描目录下的指定后缀文件，包括子目录
     find "$directory" -type f \( -name "*.$file_extension" \) -print0 | while IFS= read -r -d '' video_file; do
         # 获取文件名和不带后缀的文件名
@@ -33,7 +33,7 @@ for file_extension in "${file_extensions[@]}"; do
         fi
 
         # 比较文件最后更新时间和当前时间差
-        result=$(bash /script/check_file_update.sh "$directory/${relative_path_name}.${extension}" $file_update_time_gt)
+        result=$(bash /script/check_file_update.sh "$directory/${relative_path_name}.${extension}" $auto_file_update_time_gt)
         if [ "$result" == "false" ]; then
             continue
         fi
