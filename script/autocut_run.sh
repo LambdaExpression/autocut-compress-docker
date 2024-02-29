@@ -7,7 +7,7 @@ directory="/autocut/video/auto"
 out_directory="/autocut/video/out"
 
 # 定义要扫描的文件后缀列表 全局变量 file_extensions="mp4,xx,xx,xx"
-file_extensions_array=(${file_extensions//,/})  # 可根据需要添加其他后缀
+file_extensions_array=(`echo $file_extensions | tr ',' ' '`)  # 可根据需要添加其他后缀
 
 # 比较文件最后更新时间和当前时间差, 该变量改为使用全局变量
 # auto_file_update_time_gt=600
