@@ -14,6 +14,5 @@ RUN mkdir -p /autocut/log
 
 ENV auto_file_update_time_gt=60 file_extensions="mp4,mkv,mov" whisper_model="small"
 VOLUME ["/autocut/video/auto", "/autocut/video/out", "/autocut/log", "/root/.cache"]
-EXPOSE 9000/tcp
 
 CMD /script/start.sh;/bin/sh
