@@ -41,7 +41,7 @@ for file_extension in "${file_extensions_array[@]}"; do
         # 如果同目录下没有同名的 .md 文件
         if [ ! -e "$directory/$relative_path_name.md" ]; then
             # 执行 autocut
-            autocut -t "$directory/$relative_path_name.$extension"
+            autocut -t "$directory/$relative_path_name.$extension" --whisper-model ${whisper_model}
 
             # 修改 .md 文件中的复选框
             sed -i '/< No Speech >/! s/\[ \]/[x]/' "$directory/$relative_path_name.md"
@@ -65,7 +65,7 @@ for file_extension in "${file_extensions_array[@]}"; do
 
         if [ ! -e "$out_directory/${relative_path_name}_cut.md" ]; then
             # 执行 autocut
-            autocut -t "$out_directory/${relative_path_name}_cut.mp4"
+            autocut -t "$out_directory/${relative_path_name}_cut.mp4" --whisper-model ${whisper_model}
             rm -rf "$out_directory/${relative_path_name}_cut.srt"
         fi
     done
