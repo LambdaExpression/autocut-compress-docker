@@ -38,6 +38,11 @@ for file_extension in "${file_extensions_array[@]}"; do
             continue
         fi
 
+        # 如果同目录下有 “同名.end”
+        if [ -e "$directory/${relative_path_name}.end" ]; then
+            continue
+        fi
+
         # 如果同目录下没有同名的 .md 文件
         if [ ! -e "$directory/$relative_path_name.md" ]; then
             # 执行 autocut
@@ -54,8 +59,8 @@ for file_extension in "${file_extensions_array[@]}"; do
         fi
 
 
-        # 如果同目录下没有同名的 .end 文件，并且有 “同名_cut.文件后缀”
-        if [ ! -e "$directory/${relative_path_name}.end" ] && [ -e "$directory/${relative_path_name}_cut.mp4" ] ; then
+        # 如果同目录下有 “同名_cut.文件后缀”
+        if [ -e "$directory/${relative_path_name}_cut.mp4" ] ; then
             mkdir -p $(echo "$out_directory/${relative_path_name}_endEdg" | sed "s/\/${file_name}_endEdg//")
             # 执行 目录移动
             mv "$directory/${relative_path_name}_cut.mp4" "$out_directory/${relative_path_name}_cut.mp4" 
